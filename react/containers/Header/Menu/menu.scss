@@ -1,0 +1,25 @@
+.header-menu-wrapper {
+
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.8); //#161a1d
+  width: 100%;
+  z-index: 1000;
+  position: relative;
+  box-sizing: border-box;
+  padding: 0 20px;
+
+  &.fixed {
+    position: fixed;
+    top: 0;
+  }
+}
+
+.header-menu{
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 100%;
+
+}
+

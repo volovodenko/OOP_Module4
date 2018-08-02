@@ -1,0 +1,26 @@
+.social {
+  margin: auto 0;
+
+  a {
+    text-decoration: none;
+
+    &.fa-facebook {
+      color: #3b5998;
+    }
+
+    &.fa-youtube-play {
+      color: #c4302b;
+      margin: 0 10px;
+    }
+
+    &.fa-twitter {
+      color: #00acee;
+    }
+  }
+}
+
+@media (max-device-width: 1080px) {
+  .social{
+    display: none;
+  }
+}

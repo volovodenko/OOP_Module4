@@ -1,0 +1,20 @@
+.main-asideLeft, .main-asideRight {
+  width: 200px;
+  box-sizing: border-box;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.main-asideLeft {
+  margin-right: 20px;
+}
+
+.main-asideRight {
+  margin-left: 20px;
+}
+
+@media (max-device-width: 1080px) {
+  .main-asideRight{
+    display: none;
+  }
+}

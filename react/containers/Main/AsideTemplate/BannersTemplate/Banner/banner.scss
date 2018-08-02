@@ -1,0 +1,143 @@
+.main-asideRight_banner, .main-asideLeft_banner {
+  position: relative;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 5px black,
+  -2px 2px 5px black;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  background-color: rgba(218, 218, 218, 0.5);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .banner-content {
+    box-sizing: border-box;
+    padding: 5px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+
+    &:hover {
+      .price {
+        font-size: 1.5rem;
+        color: red;
+        cursor: default;
+      }
+    }
+
+    .price {
+      transition: font-size 200ms ease-out;
+      flex-grow: 0;
+      flex-shrink: 0;
+      height: 24px;
+      line-height: 24px;
+      vertical-align: middle;
+    }
+
+    .price, a {
+      text-align: center;
+    }
+
+    a {
+      color: blue;
+    }
+
+
+    h6 {
+      font-size: 100%;
+      margin: 0;
+
+      span {
+        display: block;
+      }
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+      width: 180px;
+      height: 200px;
+    }
+  }
+
+  .banner-tooltip {
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    opacity: 0;
+    transition: opacity 500ms ease-out;
+    display: flex;
+    background-color: rgba(0, 0, 0, 1);
+    top: calc(50% - 50px);
+    color: white;
+    z-index: 10;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px black;
+
+    &::before {
+      content: '';
+      position: absolute;
+      border: 10px solid rgba(0, 0, 0, 0);
+      top: calc(50% - 5px);
+    }
+
+    p {
+      text-align: center;
+      margin: auto 10px;
+    }
+  }
+
+}
+
+
+
+.main-asideRight_banner {
+  .banner-content:hover + .banner-tooltip {
+    animation: tooltips-right 800ms ease-out forwards;
+  }
+
+  @keyframes tooltips-right {
+    to {
+      opacity: 0.9;
+      transform: translate(30px, 0);
+    }
+  }
+
+  .banner-tooltip {
+    left: -240px;
+
+    &::before {
+      border-left-color: rgba(0, 0, 0, 1);
+      right: -20px;
+    }
+  }
+}
+
+
+
+.main-asideLeft_banner{
+
+  .banner-content:hover + .banner-tooltip {
+    animation: tooltips-left 800ms ease-out forwards;
+  }
+
+  @keyframes tooltips-left {
+    to {
+      opacity: 0.9;
+      transform: translate(-30px, 0);
+    }
+  }
+
+  .banner-tooltip {
+    right: -240px;
+
+    &::before {
+      border-right-color: rgba(0, 0, 0, 1);
+      left: -20px;
+    }
+  }
+
+}

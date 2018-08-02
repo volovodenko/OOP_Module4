@@ -1,0 +1,19 @@
+.tags {
+
+  li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 5px;
+
+    a {
+      color: rgba(0, 0, 0, .5);
+      text-decoration: none;
+
+      &:hover {
+        color: #10055e;
+        text-decoration: underline;
+      }
+    }
+
+  }
+}

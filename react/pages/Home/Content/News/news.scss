@@ -1,0 +1,37 @@
+.home-category_news {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+
+  li {
+    list-style: none;
+    padding: 5px 0 5px 0;
+    border-bottom: 1px solid #10055e;
+
+    p {
+      padding: 0;
+      margin: 0;
+    }
+
+    &.hot {
+
+      p{
+        color: red;
+      }
+
+      a{
+        font-weight: bold;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+
+      &:hover {
+        color: #d00;
+      }
+    }
+
+  }
+}

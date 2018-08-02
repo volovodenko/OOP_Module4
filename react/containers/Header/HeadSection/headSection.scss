@@ -1,0 +1,18 @@
+.header-section-wrapper {
+  width: 100%;
+  background-color: #dadada;
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+
+.header-section {
+  padding: 10px 0;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  height: 85px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  //overflow: hidden;
+}

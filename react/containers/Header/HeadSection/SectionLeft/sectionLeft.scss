@@ -1,0 +1,60 @@
+.header-section_left {
+  width: 380px;
+
+  h6 {
+    font-size: 11px;
+    margin: 0;
+    margin-bottom: 4px;
+    color: #fff;
+    background-color: #d0021b;
+    padding: 2px 4px;
+    display: inline-block;
+    border: 0;
+    border-radius: 2px;
+  }
+
+  .slider {
+    display: inline-block;
+
+    i {
+      vertical-align: middle;
+      opacity: 0.3;
+      margin-left: 5px;
+      transition: opacity 0.2s;
+      font-size: 18px;
+      display: inline-block;
+      cursor: pointer;
+      color: darkblue;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .hot-article {
+    list-style: none;
+    position: relative;
+    margin: auto;
+
+
+    li {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: none;
+
+      &.active {
+        display: block;
+      }
+
+      a {
+        color: black;
+        text-decoration: none;
+      }
+    }
+
+  }
+
+}

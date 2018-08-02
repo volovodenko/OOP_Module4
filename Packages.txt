@@ -1,0 +1,144 @@
+//Webpack + webpack CLI + локальний сервер (live reload)
+npm install --save-dev webpack webpack-cli webpack-dev-server
+********************************************************************************************************
+//react
+npm i react react-dom
+********************************************************************************************************
+//react-router-dom
+//Для створенння роутерів в реакті
+//При старте проекта вам нужно определить какой тип роутера использовать.
+//Для браузерных проектов есть BrowserRouter и HashRouter компоненты.
+//BrowserRouter — следует использовать когда вы обрабатываете на сервере динамические запросы,
+//а HashRouter используйте когда у вас статический веб сайт.
+
+npm install --save react-router-dom
+********************************************************************************************************
+//redux-devtools-extension
+//for enable Redux DevTools Extension (плагін для хрома)
+////для роботи redux devtools в хромі (в devmode)
+npm install --save-dev redux-devtools-extension
+********************************************************************************************************
+//redux
+npm install --save redux react-redux
+********************************************************************************************************
+//По умолчанию создатели действий (диспатчеры) в Redux не поддерживают асинхронные действия, такие как получение данных,
+//поэтому мы будем использовать Redux Thunk. Thunk позволяет нам писать создатели действий,
+//которые возвращают функцию вместо самого действия
+//middleware для store
+
+npm install --save redux-thunk
+********************************************************************************************************
+//babel
+npm install --save-dev babel-loader babel-core babel-preset-env babel-preset-react babel-preset-stage-0
+********************************************************************************************************
+//плагін для інжектування js в index.html
+npm i --save-dev html-webpack-plugin
+********************************************************************************************************
+//Adds CSS to the DOM by injecting a <style> tag
+//для dev mode
+npm install style-loader --save-dev
+********************************************************************************************************
+// позволяет импортировать CSS внутрь javascript-модуля
+// The css-loader interprets @import and url() like import/require() and will resolve them.
+// Currently, cssnano is bundled with css-loader, so you don't need to load it yourself.
+// However, you can also use cssnano explicitly with postcss-loader
+npm install --save-dev css-loader
+********************************************************************************************************
+//«Полифилл» (англ. polyfill) – это библиотека, которая добавляет в старые браузеры поддержку возможностей, которые в современных браузерах являются встроенными.
+//Для того, чтобы не думать об устаревших браузерах, а писать современный код, который при этом работает везде, используют полифиллы.
+------------------
+//babel-polyfill vs babel-runtime
+//The babel-polyfill and babel-runtime modules are used to serve the same function in two different ways.
+//Both modules ultimately serve to emulate an ES6 environment.
+-----------------
+//babel-polyfill accomplishes this task by assigning methods on the global or on native type prototypes
+//babel-polyfill offers you the conveniences of globally defined objects without having to transform your code further.
+//However, as with anything that mutates a global, this can introduce collisions between versions, etc.
+//http://babeljs.io/docs/en/babel-polyfill/
+
+//Because this is a polyfill (which will run before your source code), we need it to be a dependency, not a devDependency
+***npm install --save babel-polyfill
+-----------------
+//При цьому методі менший розмір файла виходе
+//babel-runtime does something very similar, but in a way that does not pollute native object prototypes or the global namespace
+//babel-runtime is not intended to be used by itself
+//babel-runtime is intended to be paired with a transform—babel-plugin-transform-runtime
+//babel-runtime, on the other hand, will not suffer from collisions as everything is name-spaced.
+//http://babeljs.io/docs/en/babel-plugin-transform-runtime
+
+//In most cases, you should install babel-plugin-transform-runtime as a development dependency (with --save-dev).
+npm install --save-dev babel-plugin-transform-runtime
+//and babel-runtime as a production dependency (with --save).
+npm install --save babel-runtime
+-----------------
+//The short of it is if you’re writing an app, either babel-polyfill or babel-runtime will serve you just the same.
+//Personally, I prefer the runtime since our code is already being transpiled by babel so tacking on another transform makes no difference,
+//and there is no possibility of namespace collision or some 3rd party code making assumptions based on it’s own poorly written polyfill.
+//In either case, they’ll need to be considered dependencies of your app while, with babel-runtime,
+//you’ll need to include babel-plugin-transform-runtime as, at the very least, a development dependency
+//(as it will need to be available at compilation time, but not at execution time).
+
+//If you’re writing a module you intend to be consumed by other projects, never use the polyfill.
+//Since you won’t control the entirety of the context in which you’ll be executing, you cannot guarantee there won’t be multiple versions
+//of various polyfills. Better to play it safe and have all your ES2015 methods and objects be namespaced by babel-runtime.
+
+//https://medium.com/@jcse/clearing-up-the-babel-6-ecosystem-c7678a314bf3
+********************************************************************************************************
+//postcss-loader
+//Loader for webpack to process CSS with PostCSS
+//для того щоб застосувати плагін autoprefixer
+npm i -D postcss-loader
+********************************************************************************************************
+//autoprefixer
+//плагин для PostCSS для добавления вендорных префиксов в CSS
+npm i --save-dev autoprefixer
+********************************************************************************************************
+//eslint
+позволяет проводить анализ качества вашего кода, написанного на любом выбранном стандарте JavaScript
+npm i eslint eslint-loader babel-eslint eslint-plugin-react --save-dev
+********************************************************************************************************
+//mini-css-extract-plugin
+//витягує css з js в окремий файл, в head вставляє ссилку на файл
+npm install --save-dev mini-css-extract-plugin
+********************************************************************************************************
+//clean-webpack-plugin
+//A webpack plugin to remove/clean your build folder(s) before building
+npm i clean-webpack-plugin --save-dev
+********************************************************************************************************
+//sass-loader
+//Loads a Sass/SCSS file and compiles it to CSS.
+//The sass-loader requires node-sass and webpack as peerDependency.
+npm install sass-loader node-sass --save-dev
+********************************************************************************************************
+//file-loader
+/A file loader module for webpack
+npm install file-loader --save-dev
+********************************************************************************************************
+//axios
+//Promise based HTTP client for the browser and node.js
+npm i axios --save
+********************************************************************************************************
+//font-awesome
+npm i font-awesome
+********************************************************************************************************
+//Для використовування декораторів
+npm install babel-plugin-transform-decorators-legacy --save-dev
+********************************************************************************************************
+Слайдер
+npm install react-image-gallery
+https://github.com/xiaolin/react-image-gallery
+********************************************************************************************************
+Модальні вікна
+npm install react-responsive-modal --save
+
+
+
+
+
+********************************************************************************************************
+Guzzle
+composer require guzzlehttp/guzzle
+
+
+
+

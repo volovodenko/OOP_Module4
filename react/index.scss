@@ -1,0 +1,34 @@
+html, body, h1, h2, h3, nav {
+  margin: 0;
+  padding: 0;
+  //height: 100%;
+  //overflow: hidden;
+}
+
+@font-face {
+  font-family: 'Apple-system';
+  src: url("./fonts/Apple/apple.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'ChunkFive';
+  src: url("./fonts/ChunkFive/chunkfive.ttf") format('truetype');
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: Apple-system, Arial, sans-serif;
+  font-size: 100%;
+}
+
+#wrapper {
+  margin: 0 ;
+  padding: 0 ;
+  width: 100%;
+  min-height: 100%;
+  background-color: #708090;
+  //border: 1px solid black;
+}

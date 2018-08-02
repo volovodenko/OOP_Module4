@@ -1,0 +1,48 @@
+.currency {
+  margin: auto 10px;
+
+  .dollar {
+    margin-right: 10px;
+    .fa-circle {
+      color: #85bb65;
+    }
+
+    .fa-usd {
+      color: white;
+    }
+  }
+
+  .euro {
+    .fa-circle {
+      color: #002395;
+    }
+
+    .fa-eur {
+      color: yellow;
+    }
+  }
+
+  .dollar, .euro {
+
+    .fa-stack {
+      i {
+        &:first-child {
+          font-size: 22px;
+        }
+
+      }
+    }
+
+    & > i {
+      vertical-align: middle;
+      color: #999;
+    }
+
+    .rate {
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+  }
+
+}

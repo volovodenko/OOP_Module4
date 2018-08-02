@@ -1,0 +1,33 @@
+.header-menu__nav {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+  height: 40px;
+  width: 70%;
+
+  & .active {
+    color: white;
+  }
+
+
+  li {
+    list-style: none;
+    //padding: 0 10px;
+
+    a {
+      color: #999;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: ease-in-out color .2s;
+      outline: 0 !important;
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
+
+}

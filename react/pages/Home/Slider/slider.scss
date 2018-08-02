@@ -1,0 +1,85 @@
+//Styles for Slider
+.image-gallery {
+  //border: 1px solid gray;
+  box-shadow: 1px 1px 1px black,
+  -1px 1px 1px black;
+}
+
+.image-gallery, .image-gallery-content {
+  width: 100%;
+}
+
+.image-gallery-slide {
+  background: black;
+
+  .image-gallery-description {
+    background: none;
+    padding: 0 40px;
+    text-align: center;
+    box-sizing: border-box;
+    width: 100%;
+
+    a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+    }
+  }
+
+  img {
+    opacity: 0.5;
+  }
+
+}
+
+//Nav
+.image-gallery-left-nav, .image-gallery-right-nav {
+  height: 100%;
+  font-size: 3rem;
+  padding: 10px;
+
+  &::-moz-focus-inner, &::-moz-focus-inner{
+    border: 0;
+  }
+
+  &::before {
+    color: gray;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+
+    &::before {
+      color: white;
+    }
+  }
+
+}
+
+.image-gallery-slide-wrapper {
+  width: 100%;
+}
+
+//Thumbs
+.image-gallery-thumbnails-wrapper {
+  bottom: 10px;
+  width: 100%;
+  position: absolute;
+}
+
+.image-gallery-thumbnail {
+  border: 3px solid transparent;
+}
+
+//My custom class for thumbs
+.custom-thumb {
+  padding: 2px;
+  cursor: default;
+  margin-right: 5px;
+
+  &:hover, &.active {
+    border: 3px solid #3493e5;
+    padding: 2px;
+  }
+
+}
