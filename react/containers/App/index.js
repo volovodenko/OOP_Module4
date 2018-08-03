@@ -155,8 +155,17 @@ export default class App extends Component {
         };
 
         this.props.onRegisterUser(data);
-
         this.closeLoginForm();
+
+        this.setState({
+            registerFormVisible: false,
+            emailValid: false,
+            nameValid: false,
+            passwordValid: false,
+            cPasswordValid: false
+        });
+
+
 
     }
 
