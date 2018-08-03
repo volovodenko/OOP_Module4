@@ -56,7 +56,6 @@ export default class Article extends Component {
 
     render() {
 
-
         if (!this.issetCategory() || this.props.articleLoadFail) {
             clearInterval(this.timerId);
             return <NotFound/>

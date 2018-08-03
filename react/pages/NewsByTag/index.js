@@ -15,7 +15,24 @@ export default class NewsByTag extends Component {
 
         this.state = {
             activePage: 1,
+        };
+
+        this.tag = this.props.tag;
+    }
+
+
+    shouldComponentUpdate(nextProps){
+
+        if(this.tag !== nextProps.tag) {
+
+            this.setState({activePage: 1});
+            this.tag = nextProps.tag;
+            this.props.onGetNewsListByTag(this.tag);
+
+            return false;
         }
+
+        return true;
     }
 
     render() {
