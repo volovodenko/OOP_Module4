@@ -1,9 +1,23 @@
-Задание смотри файл Модуль ООП - практика.doc
+Задание смотри файл Модуль ООП - практика.doc.
 
 После клонирования проекта выполнить команду:
 composer install
 
-После установки всех пакетов можно запускать сервер:
+Скопировать файл .env.example в файл .env.
+Указать поля:
+DB_DATABASE,
+DB_USERNAME,
+DB_PASSWORD.
+
+На ПК должен быть установлен MySQL сервер.
+
+Выполнить команду:
+php artisan migrate:refresh --seed
+
+затем:
+php artisan passport:install
+
+После этого можно запускать сервер:
 php artisan serve
 
 
@@ -18,4 +32,4 @@ npm i
 npm run watch - для работы в dev-режиме
 
 или
-npm run dev - для генерации production файлов main.js и main.css
+npm run build - для генерации production файлов main.js и main.css

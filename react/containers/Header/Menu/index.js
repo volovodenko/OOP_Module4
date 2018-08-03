@@ -30,12 +30,12 @@ export default class Menu extends Component {
 
     render() {
         return (
-            <nav className={'header-menu-wrapper' + (this.state.menuFixed ? ' fixed' : '')}>
+            <div className={'header-menu-wrapper' + (this.state.menuFixed ? ' fixed' : '')}>
                 <div className='header-menu'>
                     {this.props.menuLoaded ? <MenuMain {...this.props} /> : null}
                     <Search {...this.props}/>
                 </div>
-            </nav>
+            </div>
         )
     }
 

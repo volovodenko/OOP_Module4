@@ -13,7 +13,7 @@ export default class News extends Component {
                     {+item.isHot ? ' | Горячая новость' : ''}
                     {+item.isAnalytic ? ' | (analytic)' : ''}
                 </p>
-                <Link to={`/category/${this.props.link}/${item.slug}`}>
+                <Link to={`/category/${item.link}/${item.slug}`}>
                     {item.title}
                 </Link>
             </li>

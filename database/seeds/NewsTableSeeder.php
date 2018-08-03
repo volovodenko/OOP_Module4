@@ -34,8 +34,8 @@ class NewsTableSeeder extends Seeder
                 'slug' => "{$slug}-{$i}.html",
                 'text' => self::$text,
                 'isHot' => $i % 4 ? false : true,
-                'isAnalytic' => $i % 10 ? false : true,
-                'category_id' => $categoryId++ //Политика
+                'isAnalytic' => $i % 6 ? false : true,
+                'category_id' => $categoryId++
             ]);
 
             $categoryId = $categoryId > 6 ? 2 : $categoryId;

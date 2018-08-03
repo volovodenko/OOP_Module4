@@ -29,10 +29,12 @@ export default class MenuMain extends Component {
 
     render() {
         return (
-            <ul className='header-menu__nav' ref='menu'>
-                <li><NavLink exact to='/' activeClassName='active' className='fa fa-home'/></li>
-                {this.menuRender()}
-            </ul>
+            <nav className='header-menu__nav'>
+                <ul>
+                    <li><NavLink exact to='/' activeClassName='active' className='fa fa-home'/></li>
+                    {this.menuRender()}
+                </ul>
+            </nav>
         )
     }
 
@@ -41,7 +43,9 @@ export default class MenuMain extends Component {
      **************************************************************************/
 
     menuRender() {
-        return this.props.menuList.map(item => (
+        const menuList = this.props.menuList.filter(item => +item.pId === 0);
+
+        return menuList.map(item => (
             <li key={item.id}>
                 <Link
                     to={+item.catId === 1 ? '#' : `/category/${item.link}`}
@@ -51,8 +55,37 @@ export default class MenuMain extends Component {
                     className={this.state.category === item.link ? 'active' : null}
                 >
                     {item.title.toUpperCase()}
+                    {+item.catId === 1 ? <i className='fa fa-caret-down fa-lg' aria-hidden='true'/> : null}
                 </Link>
+
+                {+item.catId === 1 ? this.subMenuRender(+item.id) : null}
             </li>
         ));
+    }
+
+
+    subMenuRender(id) {
+
+        const subMenuList = this.props.menuList.filter(item => +item.pId === id);
+
+        return (
+            <ul className='subMenu'>
+                {
+                    subMenuList.map(item => (
+                        <li key={item.id}>
+                            <Link
+                                to={+item.catId === 1 ? '#' : `/category/${item.link}`}
+                            >
+                                {item.title.toUpperCase()}
+                                {+item.catId === 1 ? <i className='fa fa-caret-right' aria-hidden='true'/> : null}
+                            </Link>
+                            {+item.catId === 1 ? this.subMenuRender(+item.id) : null}
+                        </li>
+                    ))
+                }
+            </ul>
+        )
+
+
     }
 }

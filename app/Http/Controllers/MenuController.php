@@ -13,6 +13,7 @@ class MenuController extends Controller
             ->select(
                 'menus.id',
                 'menus.title',
+                'menus.parent_id as pId',
 
                 'categories.link',
                 'categories.id as catId'

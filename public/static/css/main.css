@@ -163,34 +163,60 @@
           justify-content: space-between; }
 
 .header-menu__nav {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-  margin: 0;
-  padding: 0;
-  height: 40px;
-  width: 70%; }
+  width: 70%;
+  height: 40px; }
   .header-menu__nav .active {
     color: white; }
-  .header-menu__nav li {
+  .header-menu__nav ul {
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    line-height: 40px;
     list-style: none; }
-    .header-menu__nav li a {
-      color: #999;
-      font-size: 1.1rem;
-      text-decoration: none;
-      -webkit-transition: ease-in-out color .2s;
-      transition: ease-in-out color .2s;
-      outline: 0 !important; }
-      .header-menu__nav li a:hover {
-        color: white; }
+    .header-menu__nav ul li {
+      position: relative; }
+      .header-menu__nav ul li:hover > ul {
+        display: block; }
+      .header-menu__nav ul li a {
+        color: #999;
+        font-size: 1.1rem;
+        text-decoration: none;
+        -webkit-transition: ease-in-out color .2s;
+        transition: ease-in-out color .2s;
+        outline: 0 !important; }
+        .header-menu__nav ul li a i {
+          margin-left: 10px; }
+        .header-menu__nav ul li a:hover {
+          color: white; }
+
+.header-menu__nav .subMenu {
+  position: absolute;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: none;
+  width: 170px;
+  padding: 10px;
+  list-style: none;
+  background-color: #696969;
+  -webkit-box-shadow: 2px 2px 5px black, -2px 0 5px black;
+          box-shadow: 2px 2px 5px black, -2px 0 5px black;
+  line-height: normal;
+  height: auto; }
+  .header-menu__nav .subMenu .subMenu {
+    height: auto;
+    top: -10px;
+    right: -170px; }
+  .header-menu__nav .subMenu li {
+    padding: 3px 0; }
 
 .header-menu__search {
   display: -webkit-box;
