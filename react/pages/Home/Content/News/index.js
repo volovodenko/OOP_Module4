@@ -7,7 +7,7 @@ export default class News extends Component {
 
     render() {
         return this.props.homeNewsList.map(item => (
-            <li key={item.id} className={+item.isHot ? 'hot' : ''}>
+            <li key={+item.id} className={+item.isHot ? 'hot' : ''}>
                 <p>
                     {this.getDate(item.created_at)}
                     {+item.isHot ? ' | Горячая новость' : ''}

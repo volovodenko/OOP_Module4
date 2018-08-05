@@ -1,0 +1,19 @@
+.home {
+
+  .home-top3articles {
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 1px black,
+    -1px 1px 1px black;
+    padding: 5px 10px 20px;
+    margin-bottom: 20px;
+    background-color: rgba(218, 218, 218, 0.5);
+
+    h2 {
+      text-align: center;
+      padding-bottom: 5px;
+      border-bottom: 2px solid #10055e;
+      text-transform: capitalize;
+    }
+  }
+}

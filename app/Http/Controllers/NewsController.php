@@ -5,30 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\CommentController;
 use DB;
 use App\News;
+
 use Illuminate\Support\Facades\Auth;
 
 
 class NewsController extends Controller
 {
 
-    public function getSlider()
+    public function getSliderNews()
     {
-        $news = DB::table('news')
+        $newsCollection = DB::table('news')
             ->orderBy('id', 'desc')
             ->leftJoin('categories', 'news.category_id', '=', 'categories.id')
             ->select('news.*', 'categories.link')
             ->take(5)
             ->get();
 
-        return response($news, 200);
+        return response($newsCollection, 200);
     }
 
 
     public function getHotNews()
     {
-        $hotNews = DB::table('news')
+        $hotNewsCollection = DB::table('news')
             ->leftJoin('categories', 'news.category_id', '=', 'categories.id')
             ->select('news.id', 'news.title', 'news.slug', 'categories.link')
             ->where('isHot', true)
@@ -37,17 +39,17 @@ class NewsController extends Controller
             ->get();
 
 
-        return response($hotNews, 200);
+        return response($hotNewsCollection, 200);
     }
 
 
     public function getHomeNews(CategoriesController $categories)
     {
-        $catList = json_decode($categories->getAllCategories()->getContent());
+        $catListArray = json_decode($categories->getAllCategories()->getContent());
 
         $newsList = [];
 
-        foreach ($catList as $cat) {
+        foreach ($catListArray as $cat) {
 
             $news = $cat->link === 'analytic'
                 ? $this->getAnalyticNews()->take(5)
@@ -62,27 +64,26 @@ class NewsController extends Controller
     public function getCatNews(CategoriesController $categories, $catLink, $slug = null)
     {
 
-
         if ($catLink === 'analytic') {
             return response($this->getAnalyticNews(), 200);
         }
 
 
-        $catList = json_decode($categories->getAllCategories()->getContent());
+        $catListArray = json_decode($categories->getAllCategories()->getContent());
 
-        $arrayCat = array_map(function ($item) {
+        $catLinkArray = array_map(function ($item) {
             return $item->link;
-        }, $catList);
+        }, $catListArray);
 
-        if (!in_array($catLink, $arrayCat)) {
+        if (!in_array($catLink, $catLinkArray)) {
             return response()->json(['message' => 'API: Category Not Found!'], 404);
         }
 
-        $catId = json_decode($categories->getCategoryByLink($catLink))[0]->id;
+        $catId = $categories->getCategoryByLink($catLink)->toArray()[0]->id;
 
         $result = $slug ? $this->getArticle($catId, $slug) : $this->getNewsListByCatId($catId);
 
-        if (empty(json_decode($result))) {
+        if (empty($result->toArray())) {
             return response()->json(['message' => 'API: Article Not Found!'], 404);
         }
 
@@ -95,16 +96,18 @@ class NewsController extends Controller
     {
         $currentTag = explode('.', $tag)[0];
 
-        $tagId = $tags->getTagId($currentTag);
+        $tagIdCollection = $tags->getTagIdByTagName($currentTag);
 
-        if (empty(json_decode($tagId))) {
+        $tagIdArray = $tagIdCollection->toArray();
+
+        if (empty($tagIdArray)) {
             return response()->json(['message' => 'API: Tag Not Found!'], 404);
         }
 
 
-        $tagId = json_decode($tagId)[0]->id;
+        $tagId = $tagIdArray[0]->id;
 
-        $newsList = DB::table('news')
+        $newsListCollection = DB::table('news')
             ->leftJoin('news_tags', 'news.id', '=', 'news_tags.news_id')
             ->leftJoin('categories', 'news.category_id', '=', 'categories.id')
             ->select('news.id', 'news.title', 'news.slug', 'news.created_at', 'categories.link')
@@ -112,14 +115,14 @@ class NewsController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        return response($newsList, 200);
+        return response($newsListCollection, 200);
 
     }
 
 
     protected function getNewsListByCatId($catId)
     {
-        $newsList = DB::table('news')
+        $newsListCollection = DB::table('news')
             ->leftJoin('categories', 'news.category_id', '=', 'categories.id')
             ->select('news.id', 'news.title', 'news.slug', 'news.isAnalytic',
                 'news.isHot', 'news.created_at', 'news.category_id', 'categories.link')
@@ -127,48 +130,55 @@ class NewsController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        return $newsList;
+        return $newsListCollection;
     }
 
 
     protected function getArticle($catId, $slug)
     {
 
-        $article = DB::table('news')
+        $articleCollection = DB::table('news')
             ->select('id', 'title', 'titleImg', 'isHot', 'isAnalytic', 'text', 'views', 'created_at')
             ->where('category_id', $catId)
             ->where('slug', $slug)
             ->get();
 
 
-        if (empty(json_decode($article))) {
-            return $article;
+        $articleArray = $articleCollection->toArray();
+
+        if (empty($articleArray)) {
+            return $articleCollection;
         }
 
-        $articleId = json_decode($article)[0]->id;
-        $tags = new TagController;
+        $articleId = $articleArray[0]->id;
 
+        //Get tags
+        $tags = new TagController;
         $tagsList = $tags->getTagsByArticleId($articleId);
 
+        //Get comments
+        $comments = new CommentController;
+        $commentsList = $comments->getCommentsByArticleId($articleId);
 
-        $objectArticle= json_decode($article)[0];
+        $article = $articleArray[0];
 
+        //если пользователь авторизировался
         if (Auth::check()) {
-            return json_encode([$objectArticle, $tagsList]);
+            return collect([$article, $tagsList, $commentsList]);
         }
 
-        $articleIsAnalytic = $objectArticle->isAnalytic;
 
-        if($articleIsAnalytic) {
-            $arrayArticle = array_slice(explode(' ', $objectArticle->text), 0 , 5);
+        //если не авторизировался
+        if ($article->isAnalytic) {
+            $arrayArticle = array_slice(explode(' ', $article->text), 0, 5);
             $arrayArticle[] = '...';
 
-            $objectArticle->text = implode(' ', $arrayArticle);
+            $article->text = implode(' ', $arrayArticle);
 
-            return json_encode([$objectArticle, $tagsList]);
+            return collect([$article, $tagsList, $commentsList]);
         }
 
-        return json_encode([$objectArticle, $tagsList]);
+        return collect([$article, $tagsList, $commentsList]);
 
 
     }
@@ -188,7 +198,7 @@ class NewsController extends Controller
 
     protected function getAnalyticNews()
     {
-        $newsList = DB::table('news')
+        $newsListCollection = DB::table('news')
             ->leftJoin('categories', 'news.category_id', '=', 'categories.id')
             ->select('news.id', 'news.title', 'news.slug', 'news.isAnalytic',
                 'news.isHot', 'news.created_at', 'news.category_id', 'categories.link')
@@ -196,7 +206,42 @@ class NewsController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        return $newsList;
+        return $newsListCollection;
+    }
+
+
+    public function getTop3News(){
+
+        $top3NewsIdCollection = DB::table('comments')
+            ->select(DB::raw('count(*) as c, news_id'))
+            ->groupBy('news_id')
+            ->orderBy('c', 'desc')
+            ->orderBy('news_id', 'desc')
+            ->take(3)
+            ->get();
+
+
+        $top3NewsIdArray = $top3NewsIdCollection->toArray();
+
+
+        $top3NewsArray = array_map(function($item) {
+
+            $articleCollection = DB::table('news')
+                ->leftJoin('categories', 'news.category_id', '=', 'categories.id')
+                ->select('news.id', 'news.title', 'news.slug', 'news.isAnalytic',
+                    'news.isHot', 'news.created_at', 'categories.link')
+                ->where('news.id', $item->news_id)
+                ->get();
+
+
+            return $articleCollection->toArray()[0];
+
+
+        },$top3NewsIdArray);
+
+
+        return response($top3NewsArray, 200);
+
     }
 
 

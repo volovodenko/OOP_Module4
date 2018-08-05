@@ -15,7 +15,7 @@ export default class Content extends Component {
         return (
             <main className='main-content'>
                 <Switch>
-                    <Route exact path='/' render={() => <Home {...this.props}/>}/>
+                    <Route exact path='/' render={() => <Home location={location} {...this.props}/>}/>
                     <Route exact path='/category/:category'
                            render={(location) => <CategoryList location={location} {...this.props}/>}
                     />

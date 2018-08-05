@@ -18,7 +18,7 @@ class TagController extends Controller
         return $tags;
     }
 
-    public function getTagId($tag)
+    public function getTagIdByTagName($tag)
     {
         $tagId = DB::table('tags')
             ->select('id')

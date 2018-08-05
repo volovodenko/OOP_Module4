@@ -21,6 +21,7 @@ const initialState = {
 
     article: {},
     tagsList: [],
+    commentsList: [],
     articleIsLoading: false,
     articleLoaded: false,
     articleLoadFail: false,
@@ -29,6 +30,18 @@ const initialState = {
     newsListByTagIsLoading: false,
     newsListByTagLoaded: false,
     newsListByTagLoadFail: false,
+
+    savedCommentsList: [],
+    commentIsSaving: false,
+    commentSaved: false,
+
+    top3ArticleList: [],
+    top3ArticleIsLoading: false,
+    top3ArticleLoaded: false,
+
+    top5CommentatorsList: [],
+    top5CommentatorsIsLoading: false,
+    top5CommentatorsLoaded: false
 
 };
 
@@ -122,6 +135,7 @@ export default function mainReducer(stateStore = initialState, action) { //state
             return Object.assign({}, stateStore, {
                 article: action.payload[0],
                 tagsList: action.payload[1],
+                commentsList: action.payload[2],
                 articleIsLoading: false,
                 articleLoaded: true
             });
@@ -143,6 +157,48 @@ export default function mainReducer(stateStore = initialState, action) { //state
             });
         case 'NEWS_LIST_BY_TAG_FETCH_FAIL':
             return Object.assign({}, stateStore, {newsListByTagIsLoading: false, newsListByTagLoadFail: true});
+
+        /****************************************************************************/
+        case 'SAVE_COMMENT_REQUEST':
+            return Object.assign({}, stateStore, {
+                commentIsSaving: true,
+                commentSaved: false,
+            });
+        case 'SAVE_COMMENT_SUCCESS':
+            return Object.assign({}, stateStore, {
+                savedCommentsList: [...stateStore.savedCommentsList, action.payload],
+                commentIsSaving: false,
+                commentSaved: true,
+            });
+        case 'SAVE_COMMENT_FAIL':
+            return Object.assign({}, stateStore, {
+                commentIsSaving: false,
+                commentSaved: false,
+            });
+
+        /****************************************************************************/
+        case 'TOP_3_ACTIVE_ARTICLE_FETCH_REQUEST':
+            return Object.assign({}, stateStore, {top3ArticleIsLoading: true});
+        case 'TOP_3_ACTIVE_ARTICLE_FETCH_SUCCESS':
+            return Object.assign({}, stateStore, {
+                top3ArticleList: action.payload,
+                top3ArticleIsLoading: false,
+                top3ArticleLoaded: true
+            });
+        case 'TOP_3_ACTIVE_ARTICLE_FETCH_FAIL':
+            return Object.assign({}, stateStore, {top3ArticleIsLoading: false});
+
+        /****************************************************************************/
+        case 'TOP_5_COMMENTATORS_FETCH_REQUEST':
+            return Object.assign({}, stateStore, {top5CommentatorsIsLoading: true});
+        case 'TOP_5_COMMENTATORS_FETCH_SUCCESS':
+            return Object.assign({}, stateStore, {
+                top5CommentatorsList: action.payload,
+                top5CommentatorsIsLoading: false,
+                top5CommentatorsLoaded: true
+            });
+        case 'TOP_5_COMMENTATORS_FETCH_FAIL':
+            return Object.assign({}, stateStore, {top5CommentatorsIsLoading: false});
 
         /****************************************************************************/
 

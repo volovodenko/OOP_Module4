@@ -4,6 +4,7 @@ const initialState = {
     loginRequest: false,
     token: localStorage.getItem('JWT') ? localStorage.getItem('JWT') : '',
     userName: localStorage.getItem('userName') ? localStorage.getItem('userName') : '',
+    userId: localStorage.getItem('userId') ? localStorage.getItem('userId') : '',
     loggedIn: localStorage.getItem('loggedIn') ? !!localStorage.getItem('loggedIn') : false,
 
     emailExists: true,
@@ -34,6 +35,7 @@ export default function appReducer(stateStore = initialState, action) { //stateS
             //запись в localStorage
             localStorage.setItem('JWT', action.payload.token);
             localStorage.setItem('userName', action.payload.name);
+            localStorage.setItem('userId', action.payload.id);
             localStorage.setItem('loggedIn', '1');
 
             return Object.assign(
@@ -43,6 +45,7 @@ export default function appReducer(stateStore = initialState, action) { //stateS
                     loginRequest: false,
                     loggedIn: true,
                     userName: action.payload.name,
+                    userId: action.payload.id,
                     token: action.payload.token
                 }
             );

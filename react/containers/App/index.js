@@ -53,7 +53,7 @@ export default class App extends Component {
 
 
     componentDidMount() {
-        setTimeout(()=>::this.openNewsSubscribe(), 15000);
+        setTimeout(() => ::this.openNewsSubscribe(), 15000);
         window.onbeforeunload = () => 'Dialog text here';
     }
 
@@ -112,7 +112,9 @@ export default class App extends Component {
      **************************************************************************/
 
     openNewsSubscribe() {
-        this.setState({newsSubscribeVisible: true});
+        if (!this.state.newsSubscribeVisible) {
+            this.setState({newsSubscribeVisible: true});
+        }
     }
 
     closeNewsSubscribe() {
@@ -166,7 +168,6 @@ export default class App extends Component {
         });
 
 
-
     }
 
 
@@ -180,6 +181,7 @@ export default class App extends Component {
         this.props.onLoginUser(data);
 
         this.closeLoginForm();
+        location.reload();
 
     }
 

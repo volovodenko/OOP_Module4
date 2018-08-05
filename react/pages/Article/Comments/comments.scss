@@ -1,0 +1,133 @@
+.comments {
+  margin-top: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 1px black,
+  -1px 1px 1px black;
+  padding: 5px 10px;
+  background-color: rgba(218, 218, 218, 0.5);
+
+  & > p {
+    text-transform: uppercase;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  & > ul {
+    list-style: none;
+    width: 95%;
+    margin: 0 auto;
+    padding: 0;
+    color: #bbb;
+
+    li {
+      display: block;
+      position: relative;
+      background: #141518;
+      margin-bottom: 20px;
+      padding: 10px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      text-align: left;
+      box-shadow: 2px 2px 10px black;
+
+      &::before {
+        content: '';
+        position: absolute;
+        border: 15px solid transparent;
+        border-top-color: #141518;
+        left: -15px;
+        top: 0;
+      }
+
+    }
+
+    .author {
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #bbb;
+      font-size: 14px;
+
+      a {
+
+        color: #bbb;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+  }
+}
+
+.info {
+  color: hsla(0, 0%, 100%, .6);
+  transition: opacity 2s;
+  border-top: 1px solid #bbb;
+  height: 25px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  line-height: 25px;
+
+  .info-left {
+    .vote {
+      display: inline-block;
+      opacity: .65;
+      padding: 0 3px;
+      width: 50px;
+
+      .ups {
+        cursor: pointer;
+        display: inline;
+
+        &.active, &:hover {
+          color: #1bb76e;
+          opacity: 1;
+        }
+      }
+
+      .downs {
+        cursor: pointer;
+        display: inline;
+
+        &.active, &:hover {
+          color: #f1475d;
+          opacity: 1;
+        }
+      }
+
+      i {
+        height: 16px;
+        margin-right: 4px;
+      }
+
+
+    }
+
+  }
+
+  .info-right {
+    .reply {
+      i {
+        height: 16px;
+        margin-right: 4px;
+      }
+
+      &.active {
+        cursor: pointer;
+        opacity: .65;
+
+        &:hover {
+          color: white;
+          opacity: 1;
+        }
+      }
+    }
+
+  }
+
+}

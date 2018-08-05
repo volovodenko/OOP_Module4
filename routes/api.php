@@ -27,9 +27,10 @@ Route::get('currency', 'CurrencyController@getCurrency');
 
 Route::get('b', 'BannerController@getBanner'); //банери
 
-Route::get('slider', 'NewsController@getSlider');
+Route::get('slider', 'NewsController@getSliderNews');
 Route::get('hotNews', 'NewsController@getHotNews');
 Route::get('homeNews', 'NewsController@getHomeNews');
+Route::get('top3news', 'NewsController@getTop3News');
 Route::get('catNews/{catLink}/{slug?}', 'NewsController@getCatNews')->middleware('user:api');
 Route::get('tagNews/{tag}', 'NewsController@getNewsListByTag');
 Route::post('saveViews', 'NewsController@saveViews');
@@ -37,6 +38,12 @@ Route::post('saveViews', 'NewsController@saveViews');
 Route::get('getCat', 'CategoriesController@getAllCategories');
 
 Route::get('getTags/{tag}', 'TagController@getTagsForSearch');
+
+
+Route::get('top5commentators', 'CommentController@getTop5Commentators');
+Route::post('comment/save', 'CommentController@saveComment')->middleware('user:api');
+
+Route::post('vote/save', 'VoteController@saveVote')->middleware('user:api');
 
 
 

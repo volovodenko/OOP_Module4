@@ -265,3 +265,142 @@ export const onSaveViews = (data) => dispatch => {
             dispatch(saveViewsPostFail());
         });
 };
+
+
+/*************************************************************************
+ * VOTE CHANGE
+ *************************************************************************/
+const voteUpsRequest = () => ({
+    type: 'VOTE_CHANGE_REQUEST'
+});
+
+const voteUpsSuccess = () => ({
+    type: 'VOTE_CHANGE_SUCCESS'
+});
+
+const voteUpsFail = () => ({
+    type: 'VOTE_CHANGE_FAIL'
+});
+
+
+export const onChangeVote = (data) => dispatch => {
+    dispatch(voteUpsRequest());
+
+    const url = 'vote/save';
+
+    httpRequest(url, 'POST', data)
+        .then(res => {
+            if (checkResponse(res)) {
+                dispatch(voteUpsSuccess());
+            }
+        })
+        .catch(() => {
+            dispatch(voteUpsFail());
+        });
+};
+
+
+/*************************************************************************
+ * SAVE COMMENT
+ *************************************************************************/
+const saveCommentRequest = () => ({
+    type: 'SAVE_COMMENT_REQUEST'
+});
+
+const saveCommentSuccess = (data) => ({
+    type: 'SAVE_COMMENT_SUCCESS',
+    payload: data
+});
+
+const saveCommentFail = () => ({
+    type: 'SAVE_COMMENT_FAIL'
+});
+
+
+export const onSaveComment = (data) => dispatch => {
+    dispatch(saveCommentRequest());
+
+    const url = 'comment/save';
+
+    const dataSend = {
+        news_id: data.news_id,
+        text: data.text,
+    };
+
+    httpRequest(url, 'POST', dataSend)
+        .then(res => {
+            if (checkResponse(res)) {
+                dispatch(saveCommentSuccess(data));
+            }
+        })
+        .catch(() => {
+            dispatch(saveCommentFail());
+        });
+};
+
+
+/*************************************************************************
+ * GET TOP 3 ACTIVE ARTICLE
+ *************************************************************************/
+const top3ActiveArticleFetchRequest = () => ({
+    type: 'TOP_3_ACTIVE_ARTICLE_FETCH_REQUEST'
+});
+
+const top3ActiveArticleFetchSuccess = (data) => ({
+    type: 'TOP_3_ACTIVE_ARTICLE_FETCH_SUCCESS',
+    payload: data
+});
+
+const top3ActiveArticleFetchFail = (error) => ({
+    type: 'TOP_3_ACTIVE_ARTICLE_FETCH_FAIL',
+    payload: error
+});
+
+
+export const onGetTop3ActiveArticle = () => dispatch => {
+    dispatch(top3ActiveArticleFetchRequest());
+
+    httpRequest('top3news')
+        .then(res => {
+            if (checkResponse(res)) {
+                dispatch(top3ActiveArticleFetchSuccess(res.data));
+            }
+        })
+        .catch(err => {
+            dispatch(top3ActiveArticleFetchFail(err));
+        });
+};
+
+
+
+/*************************************************************************
+ * GET TOP 5 COMMENTATORS
+ *************************************************************************/
+const top5CommentatorsFetchRequest = () => ({
+    type: 'TOP_5_COMMENTATORS_FETCH_REQUEST'
+});
+
+const top5CommentatorsFetchSuccess = (data) => ({
+    type: 'TOP_5_COMMENTATORS_FETCH_SUCCESS',
+    payload: data
+});
+
+const top5CommentatorsFetchFail = (error) => ({
+    type: 'TOP_5_COMMENTATORS_FETCH_FAIL',
+    payload: error
+});
+
+
+export const onGetTop5Commentators = () => dispatch => {
+    dispatch(top5CommentatorsFetchRequest());
+
+    httpRequest('top5commentators')
+        .then(res => {
+            if (checkResponse(res)) {
+                dispatch(top5CommentatorsFetchSuccess(res.data));
+            }
+        })
+        .catch(err => {
+            dispatch(top5CommentatorsFetchFail(err));
+        });
+};

@@ -9,7 +9,8 @@ import {
     onGetBanners, onGetCategories, onGetSlider,
     onGetHomeNews, onGetCatNewsList, onGetArticle,
     onGetNewsListByTag,
-    onSaveViews
+    onSaveViews, onChangeVote, onSaveComment,
+    onGetTop3ActiveArticle, onGetTop5Commentators
 } from './actions';
 
 const mapStateToProps = state => {
@@ -37,6 +38,7 @@ const mapStateToProps = state => {
         article: state.main.article,
         articleIsLoading: state.main.articleIsLoading,
         tagsList: state.main.tagsList,
+        commentsList: state.main.commentsList,
 
         newsListByTag: state.main.newsListByTag,
         newsListByTagLoaded: state.main.newsListByTagLoaded,
@@ -44,6 +46,18 @@ const mapStateToProps = state => {
         newsListByTagIsLoading: state.main.newsListByTagIsLoading,
 
         loginRequest: state.app.loginRequest,
+        loggedIn: state.app.loggedIn,
+        userName: state.app.userName,
+        userId: state.app.userId,
+
+        savedCommentsList: state.main.savedCommentsList,
+        commentSaved: state.main.commentSaved,
+
+        top3ArticleList: state.main.top3ArticleList,
+        top3ArticleLoaded: state.main.top3ArticleLoaded,
+
+        top5CommentatorsList: state.main.top5CommentatorsList,
+        top5CommentatorsLoaded: state.main.top5CommentatorsLoaded,
     };
 };
 
@@ -54,7 +68,8 @@ const mapStateToProps = state => {
         onGetBanners, onGetCategories, onGetSlider,
         onGetHomeNews, onGetCatNewsList, onGetArticle,
         onGetNewsListByTag,
-        onSaveViews
+        onSaveViews, onChangeVote, onSaveComment,
+        onGetTop3ActiveArticle, onGetTop5Commentators
     },
     null,
     {pure: false}

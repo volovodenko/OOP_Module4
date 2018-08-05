@@ -1,10 +1,12 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 
 import './article.scss';
 import NotFound from '../../containers/Main/Content/NotFound';
 import {getDate} from '../../helpers/getDate';
 import {URL_IMG_ARTICLES} from '../../config';
 import Tags from './Tags';
+import PostComment from './PostComment';
+import Comments from './Comments';
 
 export default class Article extends Component {
 
@@ -69,33 +71,40 @@ export default class Article extends Component {
         const {article, tagsList} = this.props;
 
         return (
-            <section className='article'>
-                <h3>
-                    {article.title}
-                </h3>
+            <Fragment>
+                <section className='article'>
 
-                <article>
-                    <p>
-                        {getDate(article.created_at)}
-                        {+article.isAnalytic ? ' | (analytic)' : ''}
-                    </p>
-                    <img src={`${URL_IMG_ARTICLES}/${article.titleImg}`}/>
-                    <p>{article.text}</p>
-                </article>
+                    <h3>
+                        {article.title}
+                    </h3>
 
-                <footer>
-                    <ul className='tags'>
-                        <i className='fa fa-tags fa-flip-horizontal'/>
-                        <Tags tagsList={tagsList}/>
-                    </ul>
+                    <article>
+                        <p>
+                            {getDate(article.created_at)}
+                            {+article.isAnalytic ? ' | (analytic)' : ''}
+                        </p>
+                        <img src={`${URL_IMG_ARTICLES}/${article.titleImg}`}/>
+                        <p>{article.text}</p>
+                    </article>
 
-                    <div className='views'>
-                        <span>Просмотров: {this.state.views}</span>
-                        <span>Читают: {this.state.reading}</span>
-                    </div>
-                </footer>
+                    <footer>
+                        <ul className='tags'>
+                            <i className='fa fa-tags fa-flip-horizontal'/>
+                            <Tags tagsList={tagsList}/>
+                        </ul>
 
-            </section>
+                        <div className='views'>
+                            <span>Просмотров: {this.state.views}</span>
+                            <span>Читают: {this.state.reading}</span>
+                        </div>
+                    </footer>
+
+                </section>
+
+                <PostComment {...this.props} articleId = {article.id}/>
+                <Comments {...this.props}/>
+
+            </Fragment>
         )
 
     }

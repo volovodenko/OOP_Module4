@@ -68,7 +68,7 @@ export default class Login extends Component {
     logout() {
         this.toggleLogout();
         this.props.onLogoutUser();
-        // location.reload();
+        location.reload();
     }
 
     renderDropDownLogout() {

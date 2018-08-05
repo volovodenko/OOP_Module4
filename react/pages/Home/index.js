@@ -11,6 +11,8 @@ export default class Home extends Component {
 
         this.props.onGetSlider();
         this.props.onGetHomeNews();
+        this.props.onGetTop3ActiveArticle();
+        this.props.onGetTop5Commentators();
     }
 
     render() {
